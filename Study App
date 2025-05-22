@@ -1,0 +1,82 @@
+### online-study-app-backend/main.py
+
+from fastapi import FastAPI
+from routers import auth, student, teacher, data_entry, common
+
+app = FastAPI(title="Online Study App")
+
+# Routers
+app.include_router(auth.router, prefix="/auth", tags=["Auth"])
+app.include_router(student.router, prefix="/student", tags=["Student"])
+app.include_router(teacher.router, prefix="/teacher", tags=["Teacher"])
+app.include_router(data_entry.router, prefix="/data_entry", tags=["Data Entry"])
+app.include_router(common.router, prefix="/common", tags=["Common"])
+
+### online-study-app-backend/routers/auth.py
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.post("/register")
+def register_user():
+    return {"message": "Register endpoint"}
+
+@router.post("/login")
+def login_user():
+    return {"message": "Login endpoint"}
+
+### online-study-app-backend/routers/student.py
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/dashboard")
+def get_student_dashboard():
+    return {"message": "Student Dashboard"}
+
+### online-study-app-backend/routers/teacher.py
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/dashboard")
+def get_teacher_dashboard():
+    return {"message": "Teacher Dashboard"}
+
+### online-study-app-backend/routers/data_entry.py
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.post("/upload_questions")
+def upload_questions():
+    return {"message": "Upload Questions"}
+
+### online-study-app-backend/routers/common.py
+
+from fastapi import APIRouter
+
+router = APIRouter()
+
+@router.get("/courses")
+def get_courses():
+    return {"message": "List of Courses"}
+
+### online-study-app-backend/requirements.txt
+
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy
+pydantic
+python-docx
+azure-storage-blob
+
+### online-study-app-backend/.env
+
+AZURE_STORAGE_CONNECTION_STRING=your_connection_string_here
+AZURE_CONTAINER_NAME=your_container_name_here
